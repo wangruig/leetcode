@@ -28,5 +28,22 @@ from typing import List
 class Solution:
 
     def lengthoflist(self, nums: List[int]) -> int:
-
+        if len(nums) <= 1:
+            return len(nums)
+        # 初始化dp[i]
+        dp = [1] * len(nums)
+        ans = 0
+        for i in range(1, len(nums)):
+            for j in range(0, i):
+                if nums[j] < nums[i]:
+                    dp[i] = max(dp[i], dp[j]+1)
+            ans = max(ans, dp[i])
+        return ans
         
+
+
+if __name__ == '__main__':
+    nums = [10, 9, 2, 5, 3, 7, 101, 18]
+    s = Solution()
+    ans = s.lengthoflist(nums)
+    print(f' ans: {ans}')
