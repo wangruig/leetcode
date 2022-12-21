@@ -19,14 +19,20 @@ class Solution:
 
     def permute(self, nums):
         def backtrack(nums, path):
-            if len(path) == len(nums):
+            if not nums and path not in ans:
                 ans.append(path.copy())
                 return
-            
-
+            for i in range(len(nums)):
+                backtrack(nums[:i]+nums[i+1:], path+[nums[i]])
         if not nums:
             return []
         ans = []
         nums.sort()
         backtrack(nums, [])
         return ans
+
+if __name__ == '__main__':
+    nums = [1,1,2]
+    s = Solution()
+    ans = s.permute(nums)
+    print(f'ans: {ans}')
