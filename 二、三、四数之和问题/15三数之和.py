@@ -28,14 +28,43 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
 """
 
 class Solution:
-
+    """
+    算法流程：
+    1.对数据进行排序
+    2.对数据进行剪枝：包括num[0]>0，num[i-1]和num[i]相同
+    3.
+    """
     def threesum(self, nums):
-
-        pass
-
+        if len(nums) < 3:
+            return []
+        nums.sort()
+        ans = []
+        for i in range(len(nums)):
+            if nums[0] > 0:
+                break
+            if i > 0 and nums[i-1] == nums[i]:
+                continue
+            j = i+1
+            k = len(nums)-1
+            while j < k:
+                if nums[j] + nums[k] == -nums[i]:
+                    ans.append([nums[i], nums[j], nums[k]])
+                    while j < k and nums[j] == nums[j+1]:
+                        j += 1
+                    while j < k and nums[k] == nums[k-1]:
+                        k -= 1
+                    j += 1
+                    k -= 1
+                elif nums[j] + nums[k] < -nums[i]:
+                    j += 1
+                else:
+                    k -= 1
+        return ans
+                    
+     
 
 if __name__ == '__main__':
-    nums = [1, 0, 1, 2, -1, -4]
+    nums = [1, 0, -1, 2, -1, -4]
     s = Solution()
     ans = s.threesum(nums)
     print(f'ans: {ans}')
