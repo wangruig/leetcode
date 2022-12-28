@@ -13,7 +13,22 @@
 
 from typing import List
 
+
+
 class Solution:
+
+    def maxsubarray(self, nums):
+        """
+        采用动态规划，dp[i]代表以下标i结尾的nums中的子序列最大和
+        """
+        dp = [0]*(len(nums))
+        dp[0] = nums[0]
+        for i in range(1, len(nums)):
+            dp[i] = max(dp[i-1]+nums[i-1], nums[i-1])
+        return max(dp)
+
+
+class Solutio:
 
     def maxsubarray(self, nums: List[int]) -> int:
         # dp[i] 为nums[0, i]中以i结尾的连续子数组的最大和

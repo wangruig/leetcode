@@ -17,14 +17,15 @@
 
 """
 
-class Solution:
 
-    def findtopk(self, arr, k):
-        """
-        思想:
-        1.按照最小堆存储
-        2.最小堆为堆顶数字最小
-        """
+class Solution:
+    """
+    流程
+    1.构建一个最小堆
+    2.遍历arr，维护一个最小堆
+    当arr[i] < hp[0]时，进行维护，堆顶pop，将arr[i]push进堆
+    """
+    def findtopmink(self, arr, k):
         import heapq
         if k == 0:
             return []
@@ -38,9 +39,12 @@ class Solution:
         return ans
 
 
+
+
+
 if __name__ == '__main__':
-    arr = [3, 2, 1]
-    k = 2
+    arr = [3, 2, 1, 0, 1]
+    k = 3
     s = Solution()
-    ans = s.findtopk(arr, k)
+    ans = s.findtopmink(arr, k)
     print(f'ans: {ans}')
