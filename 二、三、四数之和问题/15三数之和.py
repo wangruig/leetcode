@@ -40,23 +40,32 @@ class Solution:
         nums.sort()
         ans = []
         for i in range(len(nums)):
+            # nums[0] > 0时，结束
             if nums[0] > 0:
                 break
+            # 过滤掉i和i-1相同的数
             if i > 0 and nums[i-1] == nums[i]:
                 continue
+            # 第二个数下标
             j = i+1
+            # 第三个数下标
             k = len(nums)-1
             while j < k:
+                # 如果三个数相加和为0:返回下标
                 if nums[j] + nums[k] == -nums[i]:
                     ans.append([nums[i], nums[j], nums[k]])
+                    # 如果第二个数下标小于第三个数且过滤掉第二个数重复项
                     while j < k and nums[j] == nums[j+1]:
                         j += 1
+                    # 如果第二个数下标小于第三个数下标切过滤掉第三个数重复项
                     while j < k and nums[k] == nums[k-1]:
                         k -= 1
                     j += 1
                     k -= 1
+                # 小于0，第二个数下标++1
                 elif nums[j] + nums[k] < -nums[i]:
                     j += 1
+                # 大于0，第三个数下标--1
                 else:
                     k -= 1
         return ans
